@@ -1,0 +1,43 @@
+import math
+import scipy.integrate as integrate
+
+def f(x):
+  return math.sin(x)
+
+
+def integrate_trapeze(x0, x1, n):
+  integral = 0
+  i=0
+  a = (x1-x0)/n
+  while(i< n):
+    integral += (f(x0)+f(x0+a))*a/2
+    x0 += a
+    i +=1
+  return integral
+
+
+def integrate_trapeze_simplify(x0, x1, n):
+  h = x1-x0
+  integral = 0
+  a = h/n
+  xi = x0+ a
+  for i in range(0,n-1):
+    integral += f(xi)
+    xi += a
+
+  integral = (2*integral + f(x0)+f(x1))* h/2
+  return integral
+
+
+
+#def integrate_simpson(x0, x1, n)
+
+
+
+
+
+#result = integrate.quad(lambda x: f(x), 0, math.acos(-1))
+#print(result)
+integrate_trapeze_simplify(0, math.acos(-1), 2 )
+print("Trapeze simplify: %s " % integrate_trapeze_simplify(0, math.acos(-1), 2 ))
+print("Trapeze: %s" % integrate_trapeze(0, math.acos(-1), 2 ))
