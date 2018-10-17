@@ -1,0 +1,30 @@
+def f(x,y):
+    return x**2 + y**2
+
+
+def diff_eq_Euler(x0, y0, x1, h): #IMPORTANT: if you want the result for x1=1.4, you should pass as argument x1= 1.399999 because of precision, h'' can change
+    x = x0
+    y = y0
+    while x < x1:
+        print 'x= %s, y= %s' % (x,y)
+        y = y + h*f(x,y)
+        x = x + h
+    return x,y
+
+def diff_eq_Euler_is_h_ok(x0, y0, x1,h):
+    QC = (diff_eq_Euler(x0, y0, x1, h/2)[1]- diff_eq_Euler(x0, y0, x1, h)[1])/ (diff_eq_Euler(x0, y0, x1, h/4)[1]- diff_eq_Euler(x0, y0, x1, h/2)[1])
+    QC = round(QC)
+    print(QC)
+    if QC ==2.0:
+        return True
+    else:
+        return False
+
+
+def diff_eq_Euler_error(x0, y0, x1,h):
+    return diff_eq_Euler(x0, y0, x1, h/4)- diff_eq_Euler(x0, y0, x1, h/2)
+
+#print("Euler's method - diff equations: x= %s, y= %s " % diff_eq_Euler(0, 0, 1.4, 0.1))
+#print("Euler's method - diff equations: x= %s, y= %s " % diff_eq_Euler(0, 0, 1.4, 0.05))
+print("Euler's method - diff equations: x= %s, y= %s " % diff_eq_Euler(0, 0, 1.39999, 0.025))
+#print(diff_eq_Euler_is_h_ok(0, 0, 1.4, 0.1))
