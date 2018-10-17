@@ -3,7 +3,7 @@ import math
 def f(x,y):
     return math.exp(y-x)
 
-def double_integration(x0, x1, y0, y1): # only for n=2, square
+def double_integration_trapeze(x0, x1, y0, y1): # only for n=2, square
     hx = (x1-x0)/2
     hy = (y1-y0)/2
 
@@ -14,4 +14,16 @@ def double_integration(x0, x1, y0, y1): # only for n=2, square
     integral = hx*hy/4 *( sum_edges + 2*sum_midvalues + 4*mid_value)
     return integral
 
-print("Double integral: %s " % double_integration(0, 0.5, 0, 0.5))
+def double_integration_simpson(x0, x1, y0, y1): # only for n=2, square
+    hx = (x1-x0)/2
+    hy = (y1-y0)/2
+
+    mid_value = f(hx,hy)
+    sum_edges = f(x0, y0) + f(x0, y1) + f(x1, y0) + f(x1, y1)
+    sum_midvalues = f(x0, hy) + f(hx, y0) + f(hx, y1) + f(x1, hy)
+
+    integral = hx*hy/9 *( sum_edges + 4*sum_midvalues + 16*mid_value)
+    return integral
+
+print("Trapeze method - double integral: %s " % double_integration_trapeze(0, 0.5, 0, 0.5))
+print("Simpson method - double integral: %s " % double_integration_simpson(0, 0.5, 0, 0.5))
