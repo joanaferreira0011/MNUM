@@ -1,0 +1,22 @@
+import math
+
+def f(x):
+    return (2*x+1)**2-5*math.cos(10*x)
+
+def minimuxSearchGoldenSection(x1, x2, tolerance):
+    B = (math.sqrt(5)-1)/2
+    A = B**2
+    while not abs(x2-x1)<tolerance:
+        x3=x1+A*(x2-x1)
+        x4=x1+B*(x2-x1)
+        if f(x3)<f(x4):
+            x2= x4
+        else:
+            x1=x3
+
+    if f(x1)<f(x2):
+        return x1
+    else:
+        return x2
+
+print("minimuxSearchGoldenSection: %s" % minimuxSearchGoldenSection(-1,0, 0.001) )
