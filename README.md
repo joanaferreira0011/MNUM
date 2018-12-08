@@ -1,2 +1,2 @@
 # MNUM
-Python implementations of some well known Numerical Methods.
+Python implementations of some well-known Numerical Methods.
