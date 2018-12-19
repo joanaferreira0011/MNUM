@@ -1,0 +1,49 @@
+import numpy as np
+
+dependentTermsMatrix = np.array([[7.0,2.0,0.0],
+          [4.0,10.0,1.0],
+          [5.0,-2.0,8.0]])
+
+
+independentTermsMatrix = np.array([24,27,27])
+
+
+def squareMatrixTriangulation(matrix):
+    firstElement = matrix[0][0]
+    pivot =1
+    for i in range(0, matrix.shape[1]):
+        matrix[0][i] /= firstElement
+
+    for column in range (0, matrix.shape[1]):
+        pivot =matrix[column][column]
+        for i in range(column,matrix.shape[1]):
+            matrix[column][i] /= pivot
+        for line in range(column+1, matrix.shape[0]):
+            k = -1/matrix[line][column]
+            for col in range(column, matrix.shape[1]):
+                matrix[line][col] = k*matrix[line][col] +matrix[column][col]
+
+    return matrix
+
+def gaussTriangulation(matrix, resultsMatrix):
+    firstElement = matrix[0][0]
+    pivot =1
+    for i in range(0, matrix.shape[1]):
+        matrix[0][i] /= firstElement
+
+    for column in range (0, matrix.shape[1]):
+        pivot =matrix[column][column]
+        for i in range(column,matrix.shape[1]):
+            matrix[column][i] /= pivot
+        for line in range(column+1, matrix.shape[0]):
+            k = -1/matrix[line][column]
+            for col in range(column, matrix.shape[1]):
+                matrix[line][col] = k*matrix[line][col] +matrix[column][col]
+
+    return matrix
+
+def gaussMethod(dependentTermsMatrix, independentTermsMatrix):
+  triang = gaussTriangulation(dependentTermsMatrix)
+
+
+print(gaussTriangulation(dependentTermsMatrix))
